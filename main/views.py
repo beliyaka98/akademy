@@ -10,4 +10,4 @@ def register(request):
     return render(request, 'main/register.html')
 
 def main(request):
-    return render(request, 'main/main.html')
+    return render(request, 'main/main.html') 
