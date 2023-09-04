@@ -1,1 +1,7 @@
-<h1>main</h1>
+
+{% for course in courses %}
+    Title: {{course.title}}
+    <br>
+    Description: {{course.description}}
+    <br><br>
+{% endfor %}

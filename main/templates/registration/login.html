@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'main/login.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    {{ user.is_authenticated }}
+    <div class="container">
+        <div class="leftsider">
+            <img src="{% static 'main/crocodile.png' %}" class="imgs">
+        </div>
+        {% if form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+        {% endif %}
+
+        {% if next %}
+            {% if user.is_authenticated %}
+            <p>Your account doesn't have access to this page. To proceed,
+            please login with an account that has access.</p>
+            {% else %}
+            <p>Please login to see this page.</p>
+            {% endif %}
+        {% endif %}
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="rightsider">
+                <div class="logo">
+                    <span class="logo-text">AKA<span class="success">DEMY</span></span>
+                </div>
+                <p>Your amazing account</p>
+                <div class="cards">
+                    <div class="card-box">
+                        <span class="details"></span>
+                        {{form.username}}
+                    </div>
+                    <div class="card-box">
+                        <span class="details"></span>
+                        {{form.password}}
+                    </div>
+                    <div>
+                      
+                    </div>
+                    <div class="card-box">
+                        <div class="button">
+                            <input type="submit" value="Log in">
+                            <input type="hidden" name="next" value="{{ next }}">
+                        </div>
+                    </div>
+                    <div class="card-boxer">
+                        <span class="forhot"><a href="{% url 'password_reset' %}">Lost password?</a></span>
+                    </div>
+
+                    <div class="card-boxer">
+                        <span>Newbee ? </span>
+                        <a href="{% url 'signup' %}">Register</a>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
